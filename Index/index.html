@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header class="bg-white dark:bg-gray-800 shadow-lg">
+        <nav class="container mx-auto px-20 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-indigo-800 dark:text-white transition-colors duration-300">
+                <img src="FINAL1-Photoroom.png" style="width: 10%; height: 10%;">
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Home</a>
+                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">About</a>
+                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Services</a>
+                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Contact</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                
+            </div>
+            <button id="mobileMenuButton" class="md:hidden text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white focus:outline-none transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </nav>
+        <div id="mobileMenu" class="mobile-menu md:hidden bg-white dark:bg-gray-800 shadow-lg absolute w-full left-0 transform -translate-y-full opacity-0">
+            <div class="container mx-auto px-4 py-4 space-y-4">
+                <a href="#" class="block text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Home</a>
+                <a href="#" class="block text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">About</a>
+                <a href="#" class="block text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Services</a>
+                <a href="#" class="block text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let isDarkMode = false;
+        let isMobileMenuOpen = false;
+
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            document.documentElement.classList.toggle('dark');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            darkModeToggle.innerHTML = isDarkMode
+                ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+        }
+
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            if (isMobileMenuOpen) {
+                mobileMenu.classList.remove('-translate-y-full', 'opacity-0');
+                mobileMenu.classList.add('translate-y-0', 'opacity-100');
+            } else {
+                mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+                mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+            }
+        }
+
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Toggle dark mode based on system preference
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            toggleDarkMode();
+        }
+
+        // Add fade-in animation to nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach((link, index) => {
+            link.classList.add('animate-fade-in');
+            link.style.animationDelay = `${index * 0.1}s`;
+        });
+    </script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-blue-900 to-indigo-800 text-white overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('lake-6701636_1280.jpg');"></div>
+            
+            <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
+                <div class="w-6/12 flex flex-col md:flex-row items-center justify-between ml-20 bg-blue-800 bg-opacity-75 backdrop-blur-sm px-5 py-10">
+
+                    <!-- Left Side: Company Info -->
+                    <div class="w-full md:w-1/2 mb-12 md:mb-0">
+                        <h1 class="text-5xl md:text-6xl font-bold mb-10 leading-tight">
+                            Innovate.<br>Transform.<br>Succeed.
+                        </h1>
+                        <p class="text-xl mb-8 text-white-300">Empowering businesses with cutting-edge solutions for a digital future.</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="#" class="bg-white text-blue-900 font-semibold px-8 py-3 rounded-full hover:bg-blue-100 transition duration-300 text-center">Get Started</a>
+                            <a href="#" class="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-blue-900 transition duration-300 text-center">Learn More</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Decorative Element -->
+            <div class="absolute bottom-0 left-0 right-0">
+                <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+                </svg>
+            </div>
+        </section>
+
+    </main>
+
+<div class="sm:flex items-center max-w-screen-xl ">
+    <div class="sm:w-1/2 p-10 object-right ml-20">
+        <div class="image object-center text-center md:object-right">
+            <img src="planet-9186701_1280-removebg-preview.png">
+        </div>
+    </div>
+    <div class="sm:w-1/2 p-5">
+        <div class="text">
+            <span class="text-gray-500 border-b-2 border-indigo-600 uppercase">About us</span>
+            <h2 class="my-4 font-bold text-3xl  sm:text-4xl ">About <span class="text-indigo-600">Our Company</span>
+            </h2>
+            <p class="text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, commodi
+                doloremque, fugiat illum magni minus nisi nulla numquam obcaecati placeat quia, repellat tempore
+                voluptatum.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<footer class="flex flex-col space-y-10 justify-center m-10">
+
+    <nav class="flex justify-center flex-wrap gap-6 text-gray-500 font-medium">
+        <a class="hover:text-gray-900" href="#">Home</a>
+        <a class="hover:text-gray-900" href="#">About</a>
+        <a class="hover:text-gray-900" href="#">Services</a>
+        <a class="hover:text-gray-900" href="#">Media</a>
+        <a class="hover:text-gray-900" href="#">Gallery</a>
+        <a class="hover:text-gray-900" href="#">Contact</a>
+    </nav>
+
+    <div class="flex justify-center space-x-5">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.icons8.com/fluent/30/000000/facebook-new.png" />
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.icons8.com/fluent/30/000000/linkedin-2.png" />
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" />
+        </a>
+        <a href="https://messenger.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.icons8.com/fluent/30/000000/facebook-messenger--v2.png" />
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
+        </a>
+    </div>
+    <p class="text-center text-gray-700 font-medium">&copy; 2022 Company Ltd. All rights reservered.</p>
+</footer>
+
+
+
+</body>
+
+</html>
